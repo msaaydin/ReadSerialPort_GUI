@@ -21,7 +21,11 @@ namespace ReadSerialPort_S
        
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            listBox1.BackColor = Color.FromArgb(32,32,32);
+            listBox1.ForeColor = Color.FromArgb(0 ,255, 0);
+            listBox2.BackColor = Color.FromArgb(32, 32, 32);
+            listBox2.ForeColor = Color.FromArgb(0, 255, 0);
+            // listBox1.Enabled = false;
             string[] ports = SerialPort.GetPortNames();
             foreach (string port in ports)
             {
@@ -114,12 +118,33 @@ namespace ReadSerialPort_S
         private void button3_Click(object sender, EventArgs e)
         {
             fileName = textBox1.Text;
+            for (int i = 0; i < 10; i++)
+            {
+                listBox1.Items.Add(i+"");
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             MessageBox.Show("FSMVU...");
             this.Close();
+        }
+
+        private void textBox2_Enter(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter)
+            {
+                string str = textBox2.Text;
+                listBox2.Items.Add(str);
+                listBox2.TopIndex = listBox2.Items.Count - 1;
+                textBox2.Text = "";
+            }
         }
     }
 }
