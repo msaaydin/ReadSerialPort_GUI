@@ -118,7 +118,7 @@ namespace ReadSerialPort_S
 
         private void button4_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Bizi tercih ettiğiniz için teşekkür ederiz...");
+            MessageBox.Show("FSMVU...");
             this.Close();
         }
     }
