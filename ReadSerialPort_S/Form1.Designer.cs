@@ -154,9 +154,8 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label5.Location = new System.Drawing.Point(325, 280);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(260, 17);
+            this.label5.Size = new System.Drawing.Size(0, 17);
             this.label5.TabIndex = 11;
-            this.label5.Text = "RMS data Reader ( By Sadullah Öztürk)";
             // 
             // button4
             // 

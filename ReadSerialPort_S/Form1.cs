@@ -50,11 +50,12 @@ namespace ReadSerialPort_S
                 }
                 catch
                 {
-                    MessageBox.Show("Seri port veri okuma esnasında hata ile karşılaştı...");
+                    MessageBox.Show("Error.. reading data from Serial Port ... ");
                 }
             }
 
             button1.Enabled = false;
+
             
         }
 
