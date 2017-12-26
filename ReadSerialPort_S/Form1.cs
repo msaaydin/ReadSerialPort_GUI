@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using rtChart;
 
 namespace ReadSerialPort_S
 {
@@ -18,7 +19,8 @@ namespace ReadSerialPort_S
         {
             InitializeComponent();
         }
-       
+        kayChart serialDataChart;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             listBox1.BackColor = Color.FromArgb(32,32,32);
@@ -31,6 +33,11 @@ namespace ReadSerialPort_S
             {
                 comboBox1.Items.Add(port);
             }
+            serialDataChart = new kayChart(chart1,60);
+            serialDataChart.serieName = "SerialReadData";
+            serialDataChart.TriggeredUpdate(300);
+           
+
 
         }
 
@@ -67,8 +74,18 @@ namespace ReadSerialPort_S
         {      
             
                 String data = serialPort1.ReadLine();
-                this.BeginInvoke(new LineReceivedEvent(LineReceived), data);    
-               
+                
+                double parseData;
+                bool result = Double.TryParse(data, out parseData);
+                if (result)
+                {
+                    serialDataChart.TriggeredUpdate(parseData);
+
+                }
+            this.BeginInvoke(new LineReceivedEvent(LineReceived), data);
+
+
+
         }
         private delegate void LineReceivedEvent(string line);
         private void LineReceived(string line)
@@ -130,11 +147,7 @@ namespace ReadSerialPort_S
             this.Close();
         }
 
-        private void textBox2_Enter(object sender, EventArgs e)
-        {
-           
-
-        }
+       
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
@@ -144,6 +157,15 @@ namespace ReadSerialPort_S
                 listBox2.Items.Add(str);
                 listBox2.TopIndex = listBox2.Items.Count - 1;
                 textBox2.Text = "";
+            }
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (serialPort1.IsOpen)
+            {
+                serialPort1.Close();
+
             }
         }
     }

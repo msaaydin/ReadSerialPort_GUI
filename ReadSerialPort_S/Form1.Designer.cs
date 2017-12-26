@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -48,6 +51,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.listBox2 = new System.Windows.Forms.ListBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -82,7 +88,7 @@
             // 
             this.listBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 298);
+            this.listBox1.Location = new System.Drawing.Point(12, 423);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(379, 121);
             this.listBox1.TabIndex = 3;
@@ -91,7 +97,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(11, 271);
+            this.label2.Location = new System.Drawing.Point(7, 390);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(137, 24);
             this.label2.TabIndex = 4;
@@ -112,8 +118,13 @@
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "2400",
+            "4800",
             "9600",
-            "115200"});
+            "19200",
+            "38400",
+            "57600",
+            "115200",
+            "230400"});
             this.comboBox2.Location = new System.Drawing.Point(173, 25);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(121, 21);
@@ -130,7 +141,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(19, 235);
+            this.button3.Location = new System.Drawing.Point(15, 270);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 8;
@@ -140,7 +151,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(19, 209);
+            this.textBox1.Location = new System.Drawing.Point(15, 244);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(131, 20);
             this.textBox1.TabIndex = 9;
@@ -148,7 +159,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 193);
+            this.label4.Location = new System.Drawing.Point(12, 228);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(134, 13);
             this.label4.TabIndex = 10;
@@ -165,7 +176,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(720, 269);
+            this.button4.Location = new System.Drawing.Point(848, 521);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 12;
@@ -175,7 +186,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(416, 248);
+            this.button5.Location = new System.Drawing.Point(406, 350);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 13;
@@ -184,11 +195,10 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(416, 222);
+            this.textBox2.Location = new System.Drawing.Point(406, 324);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(158, 20);
             this.textBox2.TabIndex = 14;
-            this.textBox2.Enter += new System.EventHandler(this.textBox2_Enter);
             this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
             // 
             // label6
@@ -204,7 +214,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label7.Location = new System.Drawing.Point(412, 271);
+            this.label7.Location = new System.Drawing.Point(402, 380);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(95, 24);
             this.label7.TabIndex = 4;
@@ -214,16 +224,42 @@
             // 
             this.listBox2.ForeColor = System.Drawing.SystemColors.WindowText;
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(416, 298);
+            this.listBox2.Location = new System.Drawing.Point(406, 423);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(379, 121);
             this.listBox2.TabIndex = 3;
+            // 
+            // chart1
+            // 
+            this.chart1.BackColor = System.Drawing.Color.DimGray;
+            chartArea1.BackColor = System.Drawing.Color.Gray;
+            chartArea1.BorderColor = System.Drawing.Color.Empty;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(311, 25);
+            this.chart1.Name = "chart1";
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
+            series1.BorderWidth = 2;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            series1.Legend = "Legend1";
+            series1.Name = "SerialReadData";
+            series1.ShadowColor = System.Drawing.Color.Empty;
+            series1.YValuesPerPoint = 2;
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(612, 293);
+            this.chart1.TabIndex = 16;
+            this.chart1.Text = "chart1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 431);
+            this.ClientSize = new System.Drawing.Size(935, 561);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button5);
@@ -245,7 +281,9 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,6 +310,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ListBox listBox2;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 
