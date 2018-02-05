@@ -53,6 +53,7 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -192,6 +193,7 @@
             this.button5.TabIndex = 13;
             this.button5.Text = "Send";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // textBox2
             // 
@@ -254,11 +256,21 @@
             this.chart1.TabIndex = 16;
             this.chart1.Text = "chart1";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(301, 324);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(99, 13);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Gonderilecek Data:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(935, 561);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox2);
@@ -312,6 +324,7 @@
         private System.Windows.Forms.ListBox listBox2;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Label label8;
     }
 }
 

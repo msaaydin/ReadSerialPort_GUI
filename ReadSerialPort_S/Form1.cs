@@ -168,5 +168,10 @@ namespace ReadSerialPort_S
 
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            serialPort1.WriteLine(textBox2.Text);
+        }
     }
 }
